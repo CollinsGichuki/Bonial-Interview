@@ -1,7 +1,7 @@
 package com.snilloc.bonialinterview.domain
 
-import com.snilloc.bonialinterview.data.model.BrochureResponse
+import com.snilloc.bonialinterview.domain.model.BrochureData
 
 interface BonialRepository {
-    suspend fun getBrochures() : BrochureResponse
+    suspend fun getBrochures(): List<BrochureData>
 }
