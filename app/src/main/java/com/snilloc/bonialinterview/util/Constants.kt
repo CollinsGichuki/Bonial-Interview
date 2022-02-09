@@ -1,5 +1,5 @@
 package com.snilloc.bonialinterview.util
 
 object Constants {
-    const val URL = "https://test-mobile-configuration-files.s3.eu-central-1.amazonaws.com/stories-test/shelf.json"
+    const val URL = "https://test-mobile-configuration-files.s3.eu-central-1.amazonaws.com/"
 }

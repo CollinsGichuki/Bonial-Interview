@@ -1,14 +1,17 @@
 package com.snilloc.bonialinterview.data
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.common.truth.Truth.assertThat
 import com.snilloc.bonialinterview.data.mappers.dtoToDomain
-import com.snilloc.bonialinterview.data.model.EmbeddedData
+import com.snilloc.bonialinterview.data.model.*
 import com.snilloc.bonialinterview.domain.BonialRepository
 import com.snilloc.bonialinterview.domain.model.BrochureData
+import com.snilloc.bonialinterview.util.Resource
+import org.junit.Rule
 import org.junit.Test
 
 class FakeBonialRepositoryImpl : BonialRepository {
-    private val brochureDataList = listOf<BrochureData>(
+    private val brochureDataList = listOf(
         BrochureData(
             id = 1,
             contentType = "brochurePremium",
@@ -32,118 +35,176 @@ class FakeBonialRepositoryImpl : BonialRepository {
         )
     )
 
-    override suspend fun getBrochures(): List<BrochureData> {
-        return brochureDataList
+    override suspend fun getBrochures(): Resource<List<BrochureData>> {
+        return Resource.success(brochureDataList)
     }
 
-    private val contentData = listOf<EmbeddedData.ContentsData>(
-        EmbeddedData.ContentsData(
+    private val contentData = listOf(
+        ContentsData(
             placement = null,
             adFormat = null,
             contentFormatSource = null,
             contentType = "brochure",
             externalTracking = null,
-            content = listOf(
-                EmbeddedData.ContentsData.Content(
-                    id = 1,
-                    title = null,
-                    campaignItemId = null,
-                    link = null,
-                    imageURL = null,
-                    teaserText = null,
-                    validFrom = null,
-                    validUntil = null,
-                    publishedFrom = null,
-                    publishedUntil = null,
-                    type = null,
-                    pageCount = 1,
-                    publisher = null,
-                    retailer = EmbeddedData.ContentsData.Content.RetailerData(
-                        id = 11,
-                        name = "Retailer A"
-                    ),
-                    brochureImage = "someImage.jpg",
-                    badges = null,
-                    isEcommerce = false,
-                    distance = 5.0F,
-                    hideValidityDate = true
+            content = ContentList(
+                listOf(
+                    Content(
+                        id = 1,
+                        title = null,
+                        campaignItemId = null,
+                        link = null,
+                        imageURL = null,
+                        teaserText = null,
+                        validFrom = null,
+                        validUntil = null,
+                        publishedFrom = null,
+                        publishedUntil = null,
+                        type = null,
+                        pageCount = 1,
+                        publisher = null,
+                        retailer = RetailerData(
+                            id = 11,
+                            name = "Retailer A"
+                        ),
+                        brochureImage = "someImage.jpg",
+                        badges = null,
+                        isEcommerce = false,
+                        distance = 5.0F,
+                        hideValidityDate = true,
+
+                        externalTracking = ExternalTrackingData(
+                            impression = null,
+                            click = null
+                        ),
+                        innerContent = InnerContent(
+                            id = null,
+                            publisherId = null,
+                            publishedFrom = null,
+                            publishedUntil = null,
+                            clickUrl = null,
+                            imageUrl = null,
+                            type = "brochure"
+                        ),
+                        items = null,
+                        publisherId = null,
+                        publisherImage = null
+                    )
                 )
             )
         ),
-        EmbeddedData.ContentsData(
+        ContentsData(
             placement = null,
             adFormat = null,
             contentFormatSource = null,
             contentType = "brochurePremium",
             externalTracking = null,
-            content = listOf(
-                EmbeddedData.ContentsData.Content(
-                    id = 3,
-                    title = null,
-                    campaignItemId = null,
-                    link = null,
-                    imageURL = null,
-                    teaserText = null,
-                    validFrom = null,
-                    validUntil = null,
-                    publishedFrom = null,
-                    publishedUntil = null,
-                    type = null,
-                    pageCount = 1,
-                    publisher = null,
-                    retailer = EmbeddedData.ContentsData.Content.RetailerData(
-                        id = 11,
-                        name = "Retailer B"
-                    ),
-                    brochureImage = "someOtherImage.jpg",
-                    badges = null,
-                    isEcommerce = false,
-                    distance = 3.0F,
-                    hideValidityDate = true
+            content = ContentList(
+                listOf(
+                    Content(
+                        id = 3,
+                        title = null,
+                        campaignItemId = null,
+                        link = null,
+                        imageURL = null,
+                        teaserText = null,
+                        validFrom = null,
+                        validUntil = null,
+                        publishedFrom = null,
+                        publishedUntil = null,
+                        type = null,
+                        pageCount = 1,
+                        publisher = null,
+                        retailer = RetailerData(
+                            id = 11,
+                            name = "Retailer B"
+                        ),
+                        brochureImage = "someOtherImage.jpg",
+                        badges = null,
+                        isEcommerce = false,
+                        distance = 3.0F,
+                        hideValidityDate = true,
+                        externalTracking = ExternalTrackingData(
+                            impression = null,
+                            click = null
+                        ),
+                        innerContent = InnerContent(
+                            id = null,
+                            publisherId = null,
+                            publishedFrom = null,
+                            publishedUntil = null,
+                            clickUrl = null,
+                            imageUrl = null,
+                            type = "brochure"
+                        ),
+                        items = null,
+                        publisherId = null,
+                        publisherImage = null
+                    )
                 )
             )
         ),
-        EmbeddedData.ContentsData(
+        ContentsData(
             placement = null,
             adFormat = null,
             contentFormatSource = null,
             contentType = "random",
             externalTracking = null,
-            content = listOf(
-                EmbeddedData.ContentsData.Content(
-                    id = 2,
-                    title = null,
-                    campaignItemId = null,
-                    link = null,
-                    imageURL = null,
-                    teaserText = null,
-                    validFrom = null,
-                    validUntil = null,
-                    publishedFrom = null,
-                    publishedUntil = null,
-                    type = null,
-                    pageCount = 1,
-                    publisher = null,
-                    retailer = EmbeddedData.ContentsData.Content.RetailerData(
-                        id = 11,
-                        name = "Retailer B"
-                    ),
-                    brochureImage = "someOtherImage.jpg",
-                    badges = null,
-                    isEcommerce = false,
-                    distance = 4.9F,
-                    hideValidityDate = true
+            content = ContentList(
+                listOf(
+                    Content(
+                        id = 2,
+                        title = null,
+                        campaignItemId = null,
+                        link = null,
+                        imageURL = null,
+                        teaserText = null,
+                        validFrom = null,
+                        validUntil = null,
+                        publishedFrom = null,
+                        publishedUntil = null,
+                        type = null,
+                        pageCount = 1,
+                        publisher = null,
+                        retailer = RetailerData(
+                            id = 11,
+                            name = "Retailer B"
+                        ),
+                        brochureImage = "someOtherImage.jpg",
+                        badges = null,
+                        isEcommerce = false,
+                        distance = 4.9F,
+                        hideValidityDate = true,
+                        externalTracking = ExternalTrackingData(
+                            impression = null,
+                            click = null
+                        ),
+                        innerContent = InnerContent(
+                            id = null,
+                            publisherId = null,
+                            publishedFrom = null,
+                            publishedUntil = null,
+                            clickUrl = null,
+                            imageUrl = null,
+                            type = "brochure"
+                        ),
+                        items = null,
+                        publisherId = null,
+                        publisherImage = null
+                    )
                 )
             )
         ),
     )
 
+    @get:Rule
+    var instantTaskExecutorRule = InstantTaskExecutorRule()
+
     @Test
     fun `verify that BrochureData item is stored in the brochureList after mapping to domain`() {
         val brochureList = mutableListOf<BrochureData>()
 
-        contentData.forEach { it ->
-            it.content?.forEach { content ->
+        contentData.forEach {
+            it.content.content?.forEach { content ->
                 val brochureData = dtoToDomain(it, content)
                 brochureList.add(brochureData)
             }
@@ -168,9 +229,9 @@ class FakeBonialRepositoryImpl : BonialRepository {
      */
     @Test
     fun `verify only two values are stored in contentsList after filtering using contentType`() {
-        val brochuresList = mutableListOf<EmbeddedData.ContentsData>()
+        val brochuresList = mutableListOf<ContentsData>()
 
-        contentData.forEach { it ->
+        contentData.forEach {
             if (it.contentType.equals("brochure") || it.contentType.equals("brochurePremium")) {
                 //Loop through the contents
                 brochuresList.add(it)
@@ -187,10 +248,10 @@ class FakeBonialRepositoryImpl : BonialRepository {
      */
     @Test
     fun `verify only two values are stored in brochureList after filtering using distance`() {
-        val contentList = mutableListOf<EmbeddedData.ContentsData.Content>()
+        val contentList = mutableListOf<Content>()
 
         contentData.forEach { contentsData ->
-            contentsData.content?.forEach { content ->
+            contentsData.content.content?.forEach { content ->
                 if (content.distance!! < 5.0F) {
                     contentList.add(content)
                 }

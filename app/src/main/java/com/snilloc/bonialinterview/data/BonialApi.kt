@@ -5,6 +5,6 @@ import retrofit2.http.GET
 
 interface BonialApi {
     //Get the brochures
-    @GET(".")//Since there is no endpoint
-    fun getBrochures(): BrochureResponse
+    @GET("stories-test/shelf.json")
+    suspend fun getBrochures(): BrochureResponse
 }
