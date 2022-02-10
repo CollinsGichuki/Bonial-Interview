@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">BonialInterview</string>
+    <string name="brochure_image_desc">brochure image</string>
+    <string name="all">All</string>
+    <string name="distance_5km"><![CDATA[Distance < 5KM]]></string>
 </resources>
