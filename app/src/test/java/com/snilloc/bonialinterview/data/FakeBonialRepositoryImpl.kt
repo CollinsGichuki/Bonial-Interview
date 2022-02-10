@@ -2,31 +2,34 @@ package com.snilloc.bonialinterview.data
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.common.truth.Truth.assertThat
-import com.snilloc.bonialinterview.data.mappers.dtoToDomain
-import com.snilloc.bonialinterview.data.model.*
-import com.snilloc.bonialinterview.domain.BonialRepository
-import com.snilloc.bonialinterview.domain.model.BrochureData
+import com.snilloc.bonialinterview.data.cache.model.BrochureEntity
+import com.snilloc.bonialinterview.data.mappers.dtoToEntity
+import com.snilloc.bonialinterview.data.network.model.*
 import com.snilloc.bonialinterview.util.Resource
 import org.junit.Rule
 import org.junit.Test
 
-class FakeBonialRepositoryImpl : BonialRepository {
+ class FakeBonialRepositoryImpl : BonialRepository {
+     /**
+      * Since this list only contains items with distance < 5,
+      * It can be used for testing both getBrochures() and getFilteredBrochures()
+      */
     private val brochureDataList = listOf(
-        BrochureData(
+        BrochureEntity(
             id = 1,
             contentType = "brochurePremium",
             brochureImage = "https://content-media.bonial.biz/d753a0a0-7fc7-4b92-b34b-5146d1b692ad/preview.jpg",
             retailerName = "Retailer A",
             distance = 1.0F
         ),
-        BrochureData(
+        BrochureEntity(
             id = 2,
             contentType = "brochure",
             brochureImage = "https://content-media.bonial.biz/d753a0a0-7fc7-4b92-b34b-5146d1b692ad/preview.jpg",
             retailerName = "Retailer B",
             distance = 1.0F
         ),
-        BrochureData(
+        BrochureEntity(
             id = 3,
             contentType = "brochurePremium",
             brochureImage = "https://content-media.bonial.biz/d753a0a0-7fc7-4b92-b34b-5146d1b692ad/preview.jpg",
@@ -35,11 +38,15 @@ class FakeBonialRepositoryImpl : BonialRepository {
         )
     )
 
-    override suspend fun getBrochures(): Resource<List<BrochureData>> {
+    override suspend fun getBrochures(): Resource<List<BrochureEntity>> {
         return Resource.success(brochureDataList)
     }
 
-    private val contentData = listOf(
+     override fun getFilteredBrochures(): Resource<List<BrochureEntity>> {
+         return Resource.success(brochureDataList)
+     }
+
+     private val contentData = listOf(
         ContentsData(
             placement = null,
             adFormat = null,
@@ -201,17 +208,17 @@ class FakeBonialRepositoryImpl : BonialRepository {
 
     @Test
     fun `verify that BrochureData item is stored in the brochureList after mapping to domain`() {
-        val brochureList = mutableListOf<BrochureData>()
+        val brochureList = mutableListOf<BrochureEntity>()
 
         contentData.forEach {
             it.content.content?.forEach { content ->
-                val brochureData = dtoToDomain(it, content)
+                val brochureData = dtoToEntity(it, content)
                 brochureList.add(brochureData)
             }
         }
 
         assertThat(brochureList).contains(
-            BrochureData(
+            BrochureEntity(
                 id = 2,
                 contentType = "random",
                 brochureImage = "someOtherImage.jpg",

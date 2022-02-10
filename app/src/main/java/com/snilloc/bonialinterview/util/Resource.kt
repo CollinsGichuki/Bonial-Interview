@@ -3,7 +3,7 @@ package com.snilloc.bonialinterview.util
 /**
  * This class helps to handle the different states in the application.
  * Success means the brochures were successfully fetched.
- * In Loading state, the progress bar is visible to the user when fetching the news.
+ * In Loading state, the progress bar is visible to the user when fetching the brochures.
  * Error means there was a problem in fetching the brochures and the error is displayed to the user as feedback
  */
 data class Resource<out T>(val status: Status, val data: T?, val message: String?) {
