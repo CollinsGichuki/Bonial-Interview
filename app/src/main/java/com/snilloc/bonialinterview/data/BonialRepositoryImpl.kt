@@ -32,7 +32,7 @@ class BonialRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getFilteredBrochures(): Resource<List<BrochureEntity>> {
+    override suspend fun getFilteredBrochures(): Resource<List<BrochureEntity>> {
         return try {
             val filteredBrochures = db.brochureDao().getFilteredBrochures()
 

@@ -6,5 +6,5 @@ import com.snilloc.bonialinterview.util.Resource
 interface BonialRepository {
     suspend fun getBrochures(): Resource<List<BrochureEntity>>
 
-    fun getFilteredBrochures(): Resource<List<BrochureEntity>>
+    suspend fun getFilteredBrochures(): Resource<List<BrochureEntity>>
 }

@@ -42,7 +42,7 @@ import org.junit.Test
         return Resource.success(brochureDataList)
     }
 
-     override fun getFilteredBrochures(): Resource<List<BrochureEntity>> {
+     override suspend fun getFilteredBrochures(): Resource<List<BrochureEntity>> {
          return Resource.success(brochureDataList)
      }
 
