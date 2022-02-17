@@ -41,7 +41,6 @@ as it does not have a direct reference to the View.
 - [DiffUtil](https://developer.android.com/reference/androidx/recyclerview/widget/DiffUtil) - A utility class that calculates the difference between two lists and outputs a list of update operations that converts the first list into the second one. DiffUtil is more efficient than using notifyDataSetChanged().
 - [Retrofit](https://square.github.io/retrofit/) - type safe http client and supports coroutines out of the box.
 - [Gson](https://github.com/google/gson) - A Java serialization/deserialization library to convert Java Objects into JSON and back.
-- [ok-http-logging-interceptor](https://square.github.io/okhttp/interceptors/) - intercepts the request and adds the api key
 - [Glide](https://github.com/bumptech/glide) - An image loading and caching library for Android focused on smooth scrolling
 - [Dagger-Hilt](https://developer.android.com/training/dependency-injection/hilt-android) - Lightweight dependency injection library for android.
 - [Truth](https://truth.dev/) - It is an assertion library used in Android testing.
